@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ThriftCompiler">
     <compilers>
-      <compiler url="D:\Program Files\Thrift\thrift.exe" nowarn="no" strict="no" verbose="no" recurse="no" debug="no" allownegkeys="no" allow64bitconsts="no" />
+      <compiler url="D:\Program Files\Thrift\thrift.exe" nowarn="no" strict="no" verbose="no" recurse="no" debug="no" allownegkeys="yes" allow64bitconsts="no" />
     </compilers>
   </component>
 </project>

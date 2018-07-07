@@ -1,4 +1,4 @@
-#coding: utf-8
+# coding: utf-8
 from message.api import MessageService
 
 from thrift.transport import TSocket, TTransport
@@ -9,14 +9,20 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-sender = "imoocd@163.com"
-authcode = "aA111111"
+sender = "15951653519@163.com"
+# 客户端授权码
+authcode = "faxe1128"
 
 class MessageServiceHandler:
-    def sendMoblieMessage(self, moblie, message):
-        print "sendMobileMessage, mobile:" + moblie + ", message:" + message
+    # 发送短信
+    # 需要调用第三方接口
+    def sendMobileMessage(self, mobile, message):
+        print "sendMobileMessage, mobile:" + mobile + ", message:" + message
         return True
 
+    # 发送邮件
+    # 需开启邮箱服务器
+    # 发邮件的代码网上很多，不多说
     def sendEmailMessage(self, email, message):
         print "sendEmailMessage, email:" + email + ", message:" + message
         messageObj = MIMEText(message, "plain", "utf-8")
@@ -33,11 +39,15 @@ class MessageServiceHandler:
             print "send email fail caused by " + ex
             return False
 
+# thrift属于C/S
+# 消息服务的提供者 Server
 if __name__ == '__main__':
-    handler = MessageServiceHandler()
-    processor = MessageService.Processor(handler)
+    processor = MessageService.Processor(MessageServiceHandler())
+    # 传输方式 TServerSocket：非阻塞型 socket，用于服务器端
     transport = TSocket.TServerSocket("localhost", "9090")
+    # 传输协议
     tfactory = TTransport.TFramedTransportFactory()
+    # thrift的默认协议，使用二进制编码格式进行数据传输，基本上直接发送原始数据
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
 
     server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)

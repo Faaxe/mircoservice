@@ -19,10 +19,10 @@ all_structs = []
 
 
 class Iface(object):
-    def sendMoblieMessage(self, moblie, message):
+    def sendMobileMessage(self, mobile, message):
         """
         Parameters:
-         - moblie
+         - mobile
          - message
         """
         pass
@@ -43,25 +43,25 @@ class Client(Iface):
             self._oprot = oprot
         self._seqid = 0
 
-    def sendMoblieMessage(self, moblie, message):
+    def sendMobileMessage(self, mobile, message):
         """
         Parameters:
-         - moblie
+         - mobile
          - message
         """
-        self.send_sendMoblieMessage(moblie, message)
-        return self.recv_sendMoblieMessage()
+        self.send_sendMobileMessage(mobile, message)
+        return self.recv_sendMobileMessage()
 
-    def send_sendMoblieMessage(self, moblie, message):
-        self._oprot.writeMessageBegin('sendMoblieMessage', TMessageType.CALL, self._seqid)
-        args = sendMoblieMessage_args()
-        args.moblie = moblie
+    def send_sendMobileMessage(self, mobile, message):
+        self._oprot.writeMessageBegin('sendMobileMessage', TMessageType.CALL, self._seqid)
+        args = sendMobileMessage_args()
+        args.mobile = mobile
         args.message = message
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_sendMoblieMessage(self):
+    def recv_sendMobileMessage(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -69,12 +69,12 @@ class Client(Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = sendMoblieMessage_result()
+        result = sendMobileMessage_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "sendMoblieMessage failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "sendMobileMessage failed: unknown result")
 
     def sendEmailMessage(self, email, message):
         """
@@ -114,7 +114,7 @@ class Processor(Iface, TProcessor):
     def __init__(self, handler):
         self._handler = handler
         self._processMap = {}
-        self._processMap["sendMoblieMessage"] = Processor.process_sendMoblieMessage
+        self._processMap["sendMobileMessage"] = Processor.process_sendMobileMessage
         self._processMap["sendEmailMessage"] = Processor.process_sendEmailMessage
 
     def process(self, iprot, oprot):
@@ -132,13 +132,13 @@ class Processor(Iface, TProcessor):
             self._processMap[name](self, seqid, iprot, oprot)
         return True
 
-    def process_sendMoblieMessage(self, seqid, iprot, oprot):
-        args = sendMoblieMessage_args()
+    def process_sendMobileMessage(self, seqid, iprot, oprot):
+        args = sendMobileMessage_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = sendMoblieMessage_result()
+        result = sendMobileMessage_result()
         try:
-            result.success = self._handler.sendMoblieMessage(args.moblie, args.message)
+            result.success = self._handler.sendMobileMessage(args.mobile, args.message)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -150,7 +150,7 @@ class Processor(Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("sendMoblieMessage", msg_type, seqid)
+        oprot.writeMessageBegin("sendMobileMessage", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -181,16 +181,16 @@ class Processor(Iface, TProcessor):
 # HELPER FUNCTIONS AND STRUCTURES
 
 
-class sendMoblieMessage_args(object):
+class sendMobileMessage_args(object):
     """
     Attributes:
-     - moblie
+     - mobile
      - message
     """
 
 
-    def __init__(self, moblie=None, message=None,):
-        self.moblie = moblie
+    def __init__(self, mobile=None, message=None,):
+        self.mobile = mobile
         self.message = message
 
     def read(self, iprot):
@@ -204,7 +204,7 @@ class sendMoblieMessage_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRING:
-                    self.moblie = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.mobile = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
@@ -221,10 +221,10 @@ class sendMoblieMessage_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('sendMoblieMessage_args')
-        if self.moblie is not None:
-            oprot.writeFieldBegin('moblie', TType.STRING, 1)
-            oprot.writeString(self.moblie.encode('utf-8') if sys.version_info[0] == 2 else self.moblie)
+        oprot.writeStructBegin('sendMobileMessage_args')
+        if self.mobile is not None:
+            oprot.writeFieldBegin('mobile', TType.STRING, 1)
+            oprot.writeString(self.mobile.encode('utf-8') if sys.version_info[0] == 2 else self.mobile)
             oprot.writeFieldEnd()
         if self.message is not None:
             oprot.writeFieldBegin('message', TType.STRING, 2)
@@ -246,15 +246,15 @@ class sendMoblieMessage_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(sendMoblieMessage_args)
-sendMoblieMessage_args.thrift_spec = (
+all_structs.append(sendMobileMessage_args)
+sendMobileMessage_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'moblie', 'UTF8', None, ),  # 1
+    (1, TType.STRING, 'mobile', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'message', 'UTF8', None, ),  # 2
 )
 
 
-class sendMoblieMessage_result(object):
+class sendMobileMessage_result(object):
     """
     Attributes:
      - success
@@ -287,7 +287,7 @@ class sendMoblieMessage_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('sendMoblieMessage_result')
+        oprot.writeStructBegin('sendMobileMessage_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.BOOL, 0)
             oprot.writeBool(self.success)
@@ -308,8 +308,8 @@ class sendMoblieMessage_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(sendMoblieMessage_result)
-sendMoblieMessage_result.thrift_spec = (
+all_structs.append(sendMobileMessage_result)
+sendMobileMessage_result.thrift_spec = (
     (0, TType.BOOL, 'success', None, None, ),  # 0
 )
 
