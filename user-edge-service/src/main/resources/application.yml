@@ -1,0 +1,20 @@
+server:
+  name: user-edge-service
+  port: 8082
+
+# 消息服务
+message.service:
+  ip: 127.0.0.1
+  port: 9090
+# 用户服务
+user.service:
+  ip: 127.0.0.1
+  port: 7911
+
+# 配置redis
+spring:
+  redis:
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379

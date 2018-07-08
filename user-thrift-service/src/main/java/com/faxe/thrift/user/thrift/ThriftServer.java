@@ -10,6 +10,7 @@ import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TTransportException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
@@ -19,6 +20,7 @@ import javax.annotation.PostConstruct;
  * @author ZhouXiang
  * @create 2018-07-07 21:39
  **/
+@Configuration
 public class ThriftServer {
 
     @Value("${service.port}")
