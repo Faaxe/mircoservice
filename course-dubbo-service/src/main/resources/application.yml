@@ -1,0 +1,14 @@
+spring.output.ansi.enabled: ALWAYS
+service:
+  name: course-service
+  port: 8099
+
+spring:
+  datasource:
+    name: dataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # basic config
+    url: jdbc:mysql://localhost:3306/course?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password:

@@ -20,6 +20,9 @@
         <module>user-thrift-service-api</module>
         <module>user-thrift-service</module>
         <module>user-edge-service</module>
+        <module>course-dubbo-service-api</module>
+        <module>course-dubbo-service</module>
+        <module>course-edge-service</module>
     </modules>
 
     <properties>
@@ -44,6 +47,12 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>8.0.11</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.10</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
