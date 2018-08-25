@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create 2018-07-07 21:34
  **/
 @SpringBootApplication
-//@MapperScan("com.faxe.thrift.user.mapper")
 public class Application {
 
     public static void main(String[] args){
