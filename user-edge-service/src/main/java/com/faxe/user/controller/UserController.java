@@ -62,7 +62,7 @@ public class UserController {
     }
 
     /**
-     * 发生验证码
+     * 发送验证码
      *
      * @param email
      * @param phoneNumber
@@ -109,7 +109,7 @@ public class UserController {
             Response.error("at least email or phoneNumber given");
         }
         String getCode = (String)redisDao.get(key);
-        if(!code.equals(code)){
+        if(!code.equals(getCode)){
             Response.error("wrong code");
         }
 

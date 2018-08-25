@@ -1,3 +1,4 @@
+spring.output.ansi.enabled: ALWAYS
 service:
   name: user-service
   port: 7911
