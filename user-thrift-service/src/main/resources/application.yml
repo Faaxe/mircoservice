@@ -5,6 +5,8 @@ service:
 #数据源
 spring:
   datasource:
+    name: dataSource
+    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/micro-service?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password:
