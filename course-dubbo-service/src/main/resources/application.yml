@@ -12,3 +12,12 @@ spring:
     url: jdbc:mysql://localhost:3306/course?useUnicode=true&characterEncoding=UTF8
     username: root
     password:
+
+## Dubbo 服务提供者配置
+spring.dubbo:
+  application.name: course-service
+  registry.address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan: com.faxe.dubbo.course.service
